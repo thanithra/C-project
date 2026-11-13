@@ -1,0 +1,133 @@
+#include <stdio.h>
+
+int main()
+{
+    int choice, rollno;
+    int m1, m2, m3, m4, m5;
+    int total = 0;
+    int entered = 0, calculated = 0;
+    float average = 0;
+    char name[50];
+    char grade = 'F';
+    int pass = 1;
+
+    do
+    {
+        printf("\nSTUDENT MARKS MANAGEMENT SYSTEM\n");
+        printf("--------------------------------\n");
+        printf("1. Enter Student Details\n");
+        printf("2. Calculate Result\n");
+        printf("3. Display Result\n");
+        printf("4. Exit\n");
+
+        printf("\nEnter your choice: ");
+        scanf("%d", &choice);
+
+        switch(choice)
+        {
+            case 1:
+                printf("\nEnter Roll Number: ");
+                scanf("%d", &rollno);
+
+                printf("Enter Student Name: ");
+                scanf(" %49[^\n]", name);
+
+                printf("Enter Subject 1 Mark: ");
+                scanf("%d", &m1);
+
+                printf("Enter Subject 2 Mark: ");
+                scanf("%d", &m2);
+
+                printf("Enter Subject 3 Mark: ");
+                scanf("%d", &m3);
+
+                printf("Enter Subject 4 Mark: ");
+                scanf("%d", &m4);
+
+                printf("Enter Subject 5 Mark: ");
+                scanf("%d", &m5);
+
+                if(m1 < 0 || m1 > 100 ||
+                   m2 < 0 || m2 > 100 ||
+                   m3 < 0 || m3 > 100 ||
+                   m4 < 0 || m4 > 100 ||
+                   m5 < 0 || m5 > 100)
+                {
+                    printf("\nInvalid marks! Enter marks from 0 to 100.\n");
+                    entered = 0;
+                }
+                else
+                {
+                    entered = 1;
+                    printf("\nStudent details saved successfully!\n");
+                }
+
+                calculated = 0;
+                break;
+
+            case 2:
+                if(entered == 0)
+                {
+                    printf("\nPlease enter student details first.\n");
+                }
+                else
+                {
+                    total = m1 + m2 + m3 + m4 + m5;
+                    average = total / 5.0;
+
+                    if(average >= 90)
+                        grade = 'A';
+                    else if(average >= 80)
+                        grade = 'B';
+                    else if(average >= 70)
+                        grade = 'C';
+                    else if(average >= 60)
+                        grade = 'D';
+                    else
+                        grade = 'F';
+
+                    if(m1 < 35 || m2 < 35 || m3 < 35 ||
+                       m4 < 35 || m5 < 35)
+                        pass = 0;
+                    else
+                        pass = 1;
+
+                    calculated = 1;
+                    printf("\nResult calculated successfully!\n");
+                }
+                break;
+
+            case 3:
+                if(calculated == 0)
+                {
+                    printf("\nPlease calculate the result first.\n");
+                }
+                else
+                {
+                    printf("\nSTUDENT RESULT\n");
+                    printf("-------------------------\n");
+                    printf("Roll Number : %d\n", rollno);
+                    printf("Name        : %s\n", name);
+                    printf("Total       : %d\n", total);
+                    printf("Average     : %.2f\n", average);
+                    printf("Grade       : %c\n", grade);
+
+                    if(pass == 1)
+                        printf("Result      : PASS\n");
+                    else
+                        printf("Result      : FAIL\n");
+                }
+                break;
+
+            case 4:
+                printf("\nThank you!\n");
+                break;
+
+            default:
+                printf("\nInvalid choice! Try again.\n");
+        }
+
+    } while(choice != 4);
+
+    return 0;
+}
